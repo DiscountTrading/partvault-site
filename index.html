@@ -20,7 +20,7 @@
     .hero h1 { font-size:46px; line-height:1.1; margin:0 0 16px; letter-spacing:-1px; }
     .hero p { font-size:18px; color:var(--muted); max-width:620px; margin:0 auto 30px; }
     .cta { display:inline-flex; gap:12px; flex-wrap:wrap; justify-content:center; }
-    .btn { display:inline-block; padding:13px 24px; border-radius:30px; font-weight:700; font-size:15px; }
+    .btn { display:inline-block; padding:13px 24px; border-radius:30px; font-weight:700; font-size:15px; cursor:pointer; border:none; font-family:inherit; }
     .btn-primary { background:var(--accent); color:#fff; }
     .btn-ghost { background:#fff; color:var(--ink); border:1.5px solid var(--line); }
     .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:18px; padding:30px 0 60px; }
@@ -31,6 +31,60 @@
     footer { border-top:1px solid var(--line); padding:28px 0 60px; color:var(--muted); font-size:13px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; }
     footer a { color:var(--muted); font-weight:600; margin-left:16px; }
     footer a:hover { color:var(--ink); }
+
+    /* ───────── Interactive tour ───────── */
+    .tour-overlay { position:fixed; inset:0; background:rgba(20,18,16,.72); backdrop-filter:blur(4px); display:none; align-items:center; justify-content:center; z-index:1000; padding:20px; }
+    .tour-overlay.open { display:flex; }
+    .tour-card { background:var(--bg); border-radius:22px; width:100%; max-width:760px; max-height:92vh; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 30px 80px rgba(0,0,0,.45); animation:tourIn .35s cubic-bezier(.22,1,.36,1); }
+    @keyframes tourIn { from { opacity:0; transform:translateY(18px) scale(.98); } to { opacity:1; transform:none; } }
+    .tour-top { display:flex; align-items:center; justify-content:space-between; padding:16px 22px; border-bottom:1px solid var(--line); }
+    .tour-top .step-label { font-size:13px; font-weight:700; color:var(--accent); letter-spacing:.5px; }
+    .tour-close { background:none; border:none; font-size:22px; color:var(--muted); cursor:pointer; line-height:1; }
+    .tour-stage { padding:26px 26px 6px; display:flex; gap:24px; align-items:center; flex:1; min-height:0; }
+    @media (max-width:620px){ .tour-stage { flex-direction:column; padding:20px 18px 4px; } }
+    .tour-mock { flex:0 0 250px; display:flex; align-items:center; justify-content:center; }
+    @media (max-width:620px){ .tour-mock { flex:none; } }
+    .tour-copy { flex:1; }
+    .tour-copy h2 { font-size:23px; margin:0 0 10px; letter-spacing:-.4px; }
+    .tour-copy p { font-size:15px; color:var(--muted); margin:0; }
+    .tour-bottom { display:flex; align-items:center; justify-content:space-between; padding:16px 22px 20px; gap:14px; }
+    .tour-dots { display:flex; gap:7px; }
+    .tour-dots i { width:8px; height:8px; border-radius:50%; background:var(--line); transition:.25s; }
+    .tour-dots i.on { background:var(--accent); transform:scale(1.25); }
+    .tour-nav { display:flex; gap:10px; }
+    .tour-nav .btn { padding:10px 20px; font-size:14px; }
+    .btn-text { background:none; color:var(--muted); font-weight:600; font-size:14px; cursor:pointer; border:none; font-family:inherit; }
+
+    /* Phone & device mockups (CSS-drawn, no images needed) */
+    .phone { width:188px; height:330px; border-radius:30px; background:#0e0e0e; padding:11px; box-shadow:0 16px 40px rgba(0,0,0,.3); position:relative; }
+    .phone .scr { background:#fff; border-radius:21px; height:100%; overflow:hidden; display:flex; flex-direction:column; }
+    .phone .notch { position:absolute; top:15px; left:50%; transform:translateX(-50%); width:54px; height:6px; border-radius:5px; background:#000; opacity:.6; z-index:2; }
+    .pv-bar { background:var(--accent); color:#fff; font-size:11px; font-weight:700; padding:9px 12px; display:flex; align-items:center; gap:6px; }
+    .vf { flex:1; background:linear-gradient(160deg,#3a3a3a,#1d1d1d); position:relative; display:flex; align-items:center; justify-content:center; }
+    .vf .part { width:120px; height:80px; border-radius:10px; background:linear-gradient(135deg,#7a7a7a,#4a4a4a); box-shadow:inset 0 0 0 2px rgba(255,255,255,.12); position:relative; }
+    .vf .part:after { content:'🔧'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:30px; }
+    .vf .ring { position:absolute; inset:18px; border:2px dashed rgba(255,255,255,.4); border-radius:14px; }
+    .shutter { width:46px; height:46px; border-radius:50%; background:#fff; border:4px solid #ddd; margin:12px auto; box-shadow:0 0 0 3px var(--accent); }
+    .pv-field { padding:7px 12px; border-bottom:1px solid #eee; font-size:11px; display:flex; justify-content:space-between; }
+    .pv-field b { color:var(--ink); } .pv-field span { color:var(--accent); font-weight:700; }
+    .pv-ai { margin:8px 12px; background:#fff7ed; border:1px solid #fed7aa; border-radius:9px; padding:8px 10px; font-size:10px; color:#9a3412; }
+    .sku-tag { display:inline-block; background:#111; color:#7CFC9B; font-family:monospace; font-weight:800; font-size:13px; padding:6px 12px; border-radius:8px; letter-spacing:1px; }
+
+    /* Laptop/dashboard card mock */
+    .panel { width:250px; background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:0 14px 36px rgba(0,0,0,.18); }
+    .panel .ptop { background:#1c1c1e; color:#fff; font-size:11px; font-weight:700; padding:9px 13px; }
+    .panel .pbody { padding:13px; }
+    .listing-row { display:flex; gap:9px; align-items:center; margin-bottom:11px; }
+    .listing-row .thumb { width:38px; height:38px; border-radius:8px; background:linear-gradient(135deg,#9a9a9a,#5a5a5a); display:flex; align-items:center; justify-content:center; font-size:18px; }
+    .listing-row .meta { flex:1; } .listing-row .meta b { font-size:12px; } .listing-row .meta div { font-size:10px; color:var(--muted); }
+    .ebay-btn { background:#e53238; color:#fff; font-size:11px; font-weight:800; text-align:center; padding:8px; border-radius:8px; }
+    .kpis { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .kpi { background:#faf9f6; border:1px solid var(--line); border-radius:9px; padding:8px 9px; }
+    .kpi .l { font-size:8px; color:var(--muted); letter-spacing:.5px; } .kpi .v { font-size:15px; font-weight:800; }
+    .bars { display:flex; align-items:flex-end; gap:6px; height:64px; padding-top:6px; }
+    .bars i { flex:1; background:var(--accent); border-radius:4px 4px 0 0; opacity:.85; }
+    .spot { animation:spot 1.4s ease-in-out infinite; }
+    @keyframes spot { 0%,100%{ box-shadow:0 0 0 0 rgba(232,89,12,.5);} 50%{ box-shadow:0 0 0 8px rgba(232,89,12,0);} }
   </style>
 </head>
 <body>
@@ -38,6 +92,7 @@
     <header>
       <div class="brand">⚙ Part<span>Vault</span></div>
       <nav>
+        <a href="#" onclick="openTour();return false;">How it works</a>
         <a href="/about">About</a>
         <a href="/privacy">Privacy</a>
         <a href="https://app.partvault.app">Open app</a>
@@ -48,8 +103,8 @@
       <h1>From shelf to eBay<br>in seconds.</h1>
       <p>PartVault is the fast way to photograph a part, capture the details, and turn your stock into live eBay listings — built for dismantlers and resellers who'd rather be pulling parts than sitting at a desk.</p>
       <div class="cta">
-        <a class="btn btn-primary" href="https://app.partvault.app">Open the app</a>
-        <a class="btn btn-ghost" href="https://admin.partvault.app">Admin sign-in</a>
+        <button class="btn btn-primary" onclick="openTour()">▶ See how it works</button>
+        <a class="btn btn-ghost" href="https://app.partvault.app">Open the app</a>
       </div>
     </section>
 
@@ -65,5 +120,118 @@
       <div><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://app.partvault.app">Open app</a></div>
     </footer>
   </div>
+
+  <!-- ───────── Interactive tour ───────── -->
+  <div class="tour-overlay" id="tour" onclick="if(event.target===this)closeTour()">
+    <div class="tour-card">
+      <div class="tour-top">
+        <span class="step-label" id="tourStepLabel">STEP 1 OF 6</span>
+        <button class="tour-close" onclick="closeTour()" aria-label="Close">×</button>
+      </div>
+      <div class="tour-stage">
+        <div class="tour-mock" id="tourMock"></div>
+        <div class="tour-copy">
+          <h2 id="tourTitle"></h2>
+          <p id="tourBody"></p>
+        </div>
+      </div>
+      <div class="tour-bottom">
+        <div class="tour-dots" id="tourDots"></div>
+        <div class="tour-nav">
+          <button class="btn-text" id="tourBack" onclick="tourStep(-1)">Back</button>
+          <button class="btn btn-primary" id="tourNext" onclick="tourStep(1)">Next →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const TOUR = [
+      {
+        title: 'Snap the part in the yard',
+        body: 'Pull a part, point your phone, tap the shutter. That single photo is the whole capture — no forms to fill in standing at the shelf.',
+        mock: `<div class="phone"><div class="notch"></div><div class="scr">
+                 <div class="pv-bar">⚙ PartVault · Capture</div>
+                 <div class="vf"><div class="ring"></div><div class="part"></div></div>
+                 <div class="shutter spot"></div></div></div>`
+      },
+      {
+        title: 'AI writes the details',
+        body: 'PartVault reads the photo and fills in the make, model, year, category and a tidy title automatically — so you don’t type a thing.',
+        mock: `<div class="phone"><div class="notch"></div><div class="scr">
+                 <div class="pv-bar">⚙ PartVault · Details</div>
+                 <div class="pv-ai">✨ AI identified this part from your photo</div>
+                 <div class="pv-field"><b>Make</b><span>Toyota</span></div>
+                 <div class="pv-field"><b>Model</b><span>Hilux</span></div>
+                 <div class="pv-field"><b>Year</b><span>2015–20</span></div>
+                 <div class="pv-field spot"><b>Title</b><span>Alternator</span></div></div></div>`
+      },
+      {
+        title: 'A consistent SKU, automatically',
+        body: 'Every part gets a SKU in your own format the moment it’s logged — so your shelves, listings and records all line up. No spreadsheets.',
+        mock: `<div class="phone"><div class="notch"></div><div class="scr">
+                 <div class="pv-bar">⚙ PartVault · Saved</div>
+                 <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:16px;">
+                   <div style="font-size:34px;">✅</div>
+                   <div style="font-size:12px;color:#6b6b6b;">Part logged & filed under</div>
+                   <div class="sku-tag spot">TOY-ALT-0427</div>
+                 </div></div></div>`
+      },
+      {
+        title: 'Review &amp; push live to eBay',
+        body: 'Back at the laptop, review the listing, tweak anything, and publish straight to eBay in one click. Specifics and fitment come pre-filled.',
+        mock: `<div class="panel"><div class="ptop">eBay listing · review</div><div class="pbody">
+                 <div class="listing-row"><div class="thumb">🔧</div><div class="meta"><b>Toyota Hilux Alternator</b><div>2015–20 · Used – Good</div></div></div>
+                 <div class="pv-field" style="border:none;padding:4px 0;"><b>Price</b><span>$189.00</span></div>
+                 <div class="ebay-btn spot">Publish to eBay ▸</div>
+               </div></div>`
+      },
+      {
+        title: 'Profit that matches eBay to the cent',
+        body: 'Your dashboard tracks sales, eBay fees, refunds and shipping — reconciled against eBay’s own figures, so the numbers you see are the numbers that are real.',
+        mock: `<div class="panel"><div class="ptop">Dashboard · P&L (90 days)</div><div class="pbody">
+                 <div class="kpis">
+                   <div class="kpi"><div class="l">TOTAL SALES</div><div class="v">$52,928</div></div>
+                   <div class="kpi"><div class="l">EBAY FEES</div><div class="v" style="color:#e53238">−$12,694</div></div>
+                   <div class="kpi spot"><div class="l">NET PROFIT</div><div class="v" style="color:#16a34a">$30,500</div></div>
+                   <div class="kpi"><div class="l">MARGIN</div><div class="v">59.9%</div></div>
+                 </div></div></div>`
+      },
+      {
+        title: 'See what’s earning — and what’s dead',
+        body: 'Spot your best earners and fast movers, and find the dead stock clogging your shelves. Add your team with per-user permissions and a full audit trail.',
+        mock: `<div class="panel"><div class="ptop">Insights · stock performance</div><div class="pbody">
+                 <div class="bars"><i style="height:40%"></i><i style="height:70%"></i><i style="height:55%"></i><i style="height:95%" class="spot"></i><i style="height:30%"></i><i style="height:60%"></i></div>
+                 <div style="font-size:10px;color:#6b6b6b;margin-top:8px;">Best earners · fast movers · aged stock · team activity</div>
+               </div></div>`,
+        last: true
+      }
+    ];
+    let ti = 0;
+    const $ = id => document.getElementById(id);
+    function renderTour(){
+      const s = TOUR[ti];
+      $('tourStepLabel').textContent = `STEP ${ti+1} OF ${TOUR.length}`;
+      $('tourMock').innerHTML = s.mock;
+      $('tourTitle').innerHTML = s.title;
+      $('tourBody').innerHTML = s.body;
+      $('tourBack').style.visibility = ti === 0 ? 'hidden' : 'visible';
+      $('tourNext').innerHTML = s.last ? 'Open the app →' : 'Next →';
+      $('tourDots').innerHTML = TOUR.map((_,i)=>`<i class="${i===ti?'on':''}"></i>`).join('');
+    }
+    function openTour(){ ti = 0; renderTour(); $('tour').classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeTour(){ $('tour').classList.remove('open'); document.body.style.overflow=''; }
+    function tourStep(d){
+      if (TOUR[ti].last && d > 0){ window.location.href='https://app.partvault.app'; return; }
+      ti = Math.max(0, Math.min(TOUR.length-1, ti + d));
+      renderTour();
+    }
+    document.addEventListener('keydown', e => {
+      if (!$('tour').classList.contains('open')) return;
+      if (e.key === 'Escape') closeTour();
+      if (e.key === 'ArrowRight') tourStep(1);
+      if (e.key === 'ArrowLeft') tourStep(-1);
+    });
+  </script>
 </body>
 </html>
